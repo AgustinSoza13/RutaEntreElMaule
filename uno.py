@@ -1,4 +1,4 @@
-from streamlit_folium import folium_static
+import streamlit as st
 import json
 import folium
 from streamlit_folium import  st_folium
@@ -38,14 +38,14 @@ class Api:
                 self.vertice.append(valor)    
             else:
                 pass
-        print(self.vertice)
+        #print(self.vertice)
     def markerLinea(self):
         for i in self.vertice:
             latitud=i[1]
             longitud=i[0]
             cambio=latitud,longitud
             self.coordenas.append({'lat':latitud ,'lon':longitud})
-        print(self.coordenas)  
+        #print(self.coordenas)  
         for i in self.coordenas:
             icono_propio=folium.CustomIcon('parada.png',icon_size=(30,30))
             folium.Marker(location=[i['lat'],i['lon']],popup='paradero',icon=icono_propio).add_to(self.mapa)
@@ -55,7 +55,7 @@ class Api:
         self.lecturaDos()
         self.markerLinea()
         st_folium(self.mapa,width=700,height=700)
-        folium_static(self.mapa)#renderizar la pagina
+        #st(self.mapa)#renderizar la pagina
 if __name__ == '__main__':
     mapita=Api('maule.geojson','map.geojson')
     mapita.run()
